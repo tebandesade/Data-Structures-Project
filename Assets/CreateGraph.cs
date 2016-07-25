@@ -14,7 +14,7 @@ public class CreateGraph : MonoBehaviour {
 	string textoInput;
 
 	//Arc that will join the two nodes
-	public createArk ca;
+	public createArc ca;
 
 	//Node selected #1
 	GameObject seleccion1;
@@ -86,7 +86,7 @@ public class CreateGraph : MonoBehaviour {
 		}
 	}
 
-	//Verifieds 
+	//Verifies if there is one node selected to create an arc 
 	void verificacionSeleccion()
 	{
 		GameObject go = devolverGO ();
@@ -112,7 +112,7 @@ public class CreateGraph : MonoBehaviour {
 	}
 
 
-
+	//Setup to create 
 	void CreateArc()
 	{
 	//Checks if both selected nodes are the same, thus discards them as selected
@@ -127,9 +127,10 @@ public class CreateGraph : MonoBehaviour {
 		}
 	}
 
+	//Creates an Arc
 	void crearArco(GameObject go1, GameObject go2)
 	{
-		createArk ca =	new createArk (go1, go2, this);
+		createArc ca =	new createArc (go1, go2, this);
 
 	}
 

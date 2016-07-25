@@ -2,7 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;
 
-public class createArk {
+public class createArc {
 
 	GameObject vertice1 ;
 	GameObject vertice2 ; 
@@ -12,7 +12,7 @@ public class createArk {
 	LineRenderer rend;
 
 
-	public createArk(GameObject go1 , GameObject go2, CreateGraph c)
+	public createArc(GameObject go1 , GameObject go2, CreateGraph c)
 	{
 		cg = c;
 		vertice1 = go1;
