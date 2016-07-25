@@ -1,0 +1,17 @@
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/Assembly-CSharp.dll.mdb
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/obj/Debug/Assembly-CSharp.dll
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/obj/Debug/Assembly-CSharp.dll.mdb
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/UnityEngine.dll
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/UnityEditor.dll
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/Mono.Cecil.dll
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/Unity.DataContract.dll
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/Teban1503/Documents/Unity/ProjectsRandom/DataStructures/DataStructures/Temp/bin/Debug/Mono.Cecil.Mdb.dll
