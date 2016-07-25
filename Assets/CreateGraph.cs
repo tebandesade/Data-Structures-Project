@@ -4,15 +4,22 @@ using UnityEngine.UI;
 
 public class CreateGraph : MonoBehaviour {
 
+	//Gets inputField
 	public InputField input;
+
+	//Gets button that accepts InputField
 	public Button boton;
+
+	//Text of the inputField
 	string textoInput;
-	float camHeight;
-	float camWidth;
-	Rect rec;
+
+	//Arc that will join the two nodes
 	public createArk ca;
 
+	//Node selected #1
 	GameObject seleccion1;
+
+	//Node selected #2
 	GameObject seleccion2;
 
 	void Awake()
@@ -33,10 +40,13 @@ public class CreateGraph : MonoBehaviour {
 		verificacionSeleccion ();
 	}
 
+
+	//Setup for the nodes in 3D space
 	public void enterNodes()
 	{
 		textoInput = input.GetComponent<InputField> ().text;
 
+		//# of nodes you want
 		int cantidad = int.Parse (textoInput);
 
 		createNodes (cantidad);
@@ -49,17 +59,16 @@ public class CreateGraph : MonoBehaviour {
 
 	}
 
+	//Creates the amount of nodes listed in 'cantidad'
 	void createNodes(int cantidad)
 	{
-		//getCamHeighWidth ();
-		//Debug.Log ("numero de vertices: " + cantidad); Checked
 
 		for (int i = 0; i < cantidad; i++)
 		{
-//			float randomX = Random.Range (0, camWidth);
-//			float randomY = Random.Range (0, camHeight);
-
+			//Creates a primitive object that will represent the node
 			GameObject nuevo = GameObject.CreatePrimitive (PrimitiveType.Sphere);
+
+			//Places the node in the current display
 			Vector3 temp = new Vector3 (Random.Range(-10.0f,10.0f), Random.Range(-4.2f,6.10f), 0 );
 			nuevo.transform.position = temp;
 			nuevo.GetComponent<MeshRenderer> ().material.color = Color.red;
@@ -67,21 +76,7 @@ public class CreateGraph : MonoBehaviour {
 		}
 	}
 
-	void getCamHeighWidth()
-	{
-//		Camera cam = Camera.main;
-//
-//		rec = cam.pixelRect;
-//
-//		camHeight = cam.pixelHeight;
-//		camWidth  =cam.pixelWidth;
-
-	
-
-		//Debug.Log ("numero de  pixels height : " + camHeight); Checked
-		//Debug.Log ("numero de pixel width : " + camWidth);  Checked
-	}
-
+	//Changes the sate of a node
 	void changeState(GameObject go)
 	{
 		if (go.activeSelf == true) {
@@ -91,6 +86,7 @@ public class CreateGraph : MonoBehaviour {
 		}
 	}
 
+	//Verifieds 
 	void verificacionSeleccion()
 	{
 		GameObject go = devolverGO ();
@@ -119,6 +115,7 @@ public class CreateGraph : MonoBehaviour {
 
 	void CreateArc()
 	{
+	//Checks if both selected nodes are the same, thus discards them as selected
 		if (seleccion1 == seleccion2) {
 			cambiarColorDisActive (seleccion1.GetComponent<MeshRenderer> ());
 			seleccion1 = null;
@@ -136,31 +133,29 @@ public class CreateGraph : MonoBehaviour {
 
 	}
 
+	//Returns the current Node
 	GameObject devolverGO()
 	{
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-		//Debug.Log (ray);
 		RaycastHit hit;
 
 		if (Input.GetMouseButtonDown (0)) {
 			if (Physics.Raycast (ray, out hit)) {
 				if (hit.collider.tag == "nodo") {
 					return hit.collider.gameObject;
-
-				} else {
-					return null;
-				}
+				} 
 			}
-		} else {
-			return null;
-		}
+		} 
 		return null;
 	}
 
+	//Changes the color of the node to when it's active
 	void cambiarColorActive(MeshRenderer mr)
 	{
 		mr.material.color = Color.green;
 	}
+
+	//Changes the color of hte node when it's not active
 	void cambiarColorDisActive(MeshRenderer mr)
 	{
 		mr.material.color = Color.red;
