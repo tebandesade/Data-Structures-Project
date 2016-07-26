@@ -6,216 +6,251 @@ using System.Collections;
 public class Arreglo : MonoBehaviour {
 
 
-	public GameObject[] objetos ;
-	private GameObject primerObjeto; 
-	public  Button botonAgregar;
-	public Button botonBorrar;
-	public InputField campoInput;
-	private Color porDefecto; 
-	public Button inicio;
-	Transform padre;
-	public int num333 = 1;
+    //The array
+	public GameObject[] objects ;
 
-	int n =2;
+	//Reference to the first array position
+	private GameObject firstObject; 
+
+	//Reference to the button that adds an element
+	public  Button addButton;
+
+	//Reference to the button that removes an element
+	public Button deleteButton;
+
+	//Reference to the inputField
+	public InputField inputField;
+
+	//Reference to the default color (grey)
+	private Color defaultColor; 
+
+	//Reference to the button that initializes a fixed array of size 10
+	public Button initialButton;
+
+	//Referece to know the position where the array begins in 3D space
+	Transform father;
 
 
-	// Use this for initialization
+	//int n =2;
+
+	//Unity's Awake method that initializes references 
+	void Awake()
+	{
+		firstObject = objects [0];
+		father = firstObject.transform.parent;
+		firstObject.SetActive (false);
+	}
+
+	// Unity's Start method
 	void Start () 
 	{
-		
-
-		primerObjeto = objetos [0];
-		padre = primerObjeto.transform.parent;
-		primerObjeto.SetActive (false);
-
 
 	}
-	
-	// Update is called once per frame
+
+	// Unity's Update method. Update is called once per frame
 	void Update () 
 	{
-		//Debug.Log(campoInput.text + "q" );
-		//Debug.Log();
-	 //	deleteFromArray();
+
 	}
 
-public	void addToArray()
+	//Adds an element to the array
+	public	void addToArray()
 	{
-
-		if(verificarCampoInput())
+		//Checks if there's an index parameter
+		if (verifyInputField ()) 
 		{
-			int numero = int.Parse(campoInput.textComponent.text);
-			objetos [numero].GetComponent<MeshRenderer> ().material.color = Color.magenta;
+			indexToAdd ();
 		}
-	
+
 		else
 		{
-			for (int i = 0; i < objetos.Length; i++) 
+			addNoIndex ();
+		}
+	}
+
+	//Adds element to the index written in the inputField
+	public void indexToAdd()
+	{
+			int number = int.Parse(inputField.textComponent.text);
+
+			if (objects [number].GetComponent<MeshRenderer> ().material.color == Color.magenta) 
 			{
-				//Debug.Log ("Entro a bucle");
-				bool estaVacia = revisarColor (objetos [i].GetComponent<MeshRenderer> ().material.color);
-					
-				if (estaVacia) 
-				{
-					//Debug.Log ("Entro a estaVacia");
-					objetos [i].GetComponent<MeshRenderer> ().material.color = Color.magenta;
-					//	Debug.Log(objetos [i].GetComponent<MeshRenderer> ().material.mainTexture);
-					break;
-				}
-				if (objetos [objetos.Length-1].GetComponent<MeshRenderer>().material.color ==Color.magenta ) {
-					reArrangeArray();
-					break;
-				}
+				Debug.LogError ("There's already an object in pos: " + number);
 			}
-			//Check 
-		}
 
-
-
+			objects [number].GetComponent<MeshRenderer> ().material.color = Color.magenta;
+			clearInputField ();	
 	}
 
-	public bool revisarColor(Color actual)
+	//Adds element after the last added object
+	public void addNoIndex()
 	{
-		if (actual == porDefecto) 
+		for (int i = 0; i < objects.Length; i++) 
+		{
+			bool isEmpty = checkColor (objects [i].GetComponent<MeshRenderer> ().material.color);
+
+			if (isEmpty) 
+			{
+				objects [i].GetComponent<MeshRenderer> ().material.color = Color.magenta;
+				break;
+			}
+
+			//Checks if the last element of the array is 'filled' with an object
+			if (objects [objects.Length-1].GetComponent<MeshRenderer>().material.color ==Color.magenta ) 
+			{
+				reSizeArray();
+				break;
+			}
+		}
+	}
+
+	//Checks if the current pos in the array is occupied.
+	//If it has the default color it means it's not (true).
+	public bool checkColor(Color actual)
+	{
+		if (actual == defaultColor) 
 		{
 			return true;
 		}
 		return false;
 	}
 
-	public bool verificarCampoInput()
+	//Checks if there's an index value written in the input field 
+	public bool verifyInputField()
 	{
-		//Debug.Log ("Entro a verificar input " + campoInput.textComponent.text);
-		if (campoInput.textComponent.text.Length > 0) 
+		if (inputField.textComponent.text.Length > 0) 
 		{
-			//Debug.Log ("Entro a validar input");
 			return true;
 		}
 		return false;
 	}
 
-	public void activarBotones()
+	public void activateButtons()
 	{
-		crearCasillas ();
-		botonAgregar.gameObject.SetActive (true);
-		botonBorrar.gameObject.SetActive (true);
-		campoInput.gameObject.SetActive (true);
-
-		inicio.gameObject.SetActive (false);
+		createCubes ();
+		addButton.gameObject.SetActive (true);
+		deleteButton.gameObject.SetActive (true);
+		inputField.gameObject.SetActive (true);
+		initialButton.gameObject.SetActive (false);
 	}
 
-	void crearCasillas()
+	public void createCubes()
 	{
-		primerObjeto.SetActive (true);
-		float x = primerObjeto.transform.position.x;
+		firstObject.SetActive (true);
+		float x = firstObject.transform.position.x;
 
-
-		for (int i = 1; i < objetos.Length; i++) 
+		for (int i = 1; i < objects.Length; i++) 
 		{
-
-			objetos [i] = Instantiate (primerObjeto);
-			objetos [i].transform.parent = padre.transform;
-
+			objects [i] = Instantiate (firstObject);
+			objects [i].transform.parent = father.transform;
 			x++;
 			x = x + 0.5f;
-			objetos [i].transform.position = new Vector3 (0.5f,0,x);
+			objects [i].transform.position = new Vector3 (0.5f,0,x);
 
 		}
-		porDefecto = objetos [0].GetComponent<MeshRenderer> ().material.color;
+		defaultColor = objects [0].GetComponent<MeshRenderer> ().material.color;
 	}
 
 	public void deleteFromArray()
 	{
-		int longitud = objetos.Length;
+		if (verifyInputField ()) 
+		{
+			deleteIndex ();
+		}
 
+		else 
+		{
+			deleteNoIndex ();
+		}
+	}
 
-		if (verificarCampoInput ()) {
-			int numero = int.Parse (campoInput.textComponent.text);
-			objetos [numero].GetComponent<MeshRenderer> ().material.color = porDefecto;
-		} else {
-			for (int i = longitud - 1; i >= 0; i--) {
-				bool estaVacia = revisarColor (objetos [i].GetComponent<MeshRenderer> ().material.color);
-				if (!estaVacia) {
-					objetos [i].GetComponent<MeshRenderer> ().material.color =	porDefecto;
-					break;
-				}
+	//Deletes element in the index written in the inputField
+	public void deleteIndex()
+	{
+		int numero = int.Parse (inputField.textComponent.text);
+
+		if (objects [numero].GetComponent<MeshRenderer> ().material.color == defaultColor) 
+		{
+			Debug.Log ("There's nothing to delete.");
+		}
+
+		objects [numero].GetComponent<MeshRenderer> ().material.color = defaultColor;
+		clearInputField ();
+	}
+
+	//Deletes last object in the array
+	public void deleteNoIndex()
+	{
+		for (int i = objects.Length - 1; i >= 0; i--) 
+		{
+			bool estaVacia = checkColor (objects [i].GetComponent<MeshRenderer> ().material.color);
+			if (!estaVacia) 
+			{
+				objects [i].GetComponent<MeshRenderer> ().material.color =	defaultColor;
+				break;
 			}
+		}
+	}
+		
+	// Re-sizes the array to create space for more elements
+	public void reSizeArray()
+	{
+		if (objects [objects.Length - 1].GetComponent<MeshRenderer> ().material.color == Color.magenta) 
+		{
+			//Temporal array
+			GameObject[] temp = new GameObject[(objects.Length * 3) / 2];
+
+			//Reference to the arrays
+			int previousSize = objects.Length;
+
+			for (int i = 0; i < objects.Length; i++) 
+			{
+				temp [i] = objects [i];
+			}
+
+			objects = temp;
+			reCreateCubes (previousSize - 1);
+
 		}
 		
 	}
 
-	void reArrangeArray()
+	public void reCreateCubes( int y)
 	{
-		if (objetos [objetos.Length-1].GetComponent<MeshRenderer> ().material.color ==Color.magenta) {
-			Debug.Log ("Entro a Re arrange");
-			GameObject[] temp = new GameObject[(objetos.Length * 3) / 2];
-
-			int tamAnterior = 0;
-
-			for (int i = 0; i < objetos.Length; i++) {
-
-				temp [i] = objetos [i];
-				tamAnterior ++;
-			}
-			objetos = temp;
-			//objetos.Length;
-
-			reCreateCasillas (objetos, tamAnterior-1);
-
-			Debug.Log (objetos.Length+ " parce que");
-			/*
-		for(int i = 0; i<objetos.Length;i++)
-		{
-			Debug.Log ("Entro a agregar nuevo arreglo");
-			temp[i]= objetos[i];
-			}
-		}
-	*/
-		}
-	}
-
-	void reCreateCasillas(GameObject[] z, int y)
-	{
-
-
-		primerObjeto = z [y];
-
-
-		float x = primerObjeto.transform.position.z;
-
-
-
+		//Reference to the last (y) pos for z
+		firstObject = objects [y];
+		float x = firstObject.transform.position.z;
 	
-		for (int i = y+1; i < z.Length; i++) 
+		for (int i = y+1; i < objects.Length; i++) 
 		{
-			
-			z [i] = Instantiate (primerObjeto);
-			Debug.Log (z [i].gameObject.transform.position);
-			z [i].transform.parent = primerObjeto.transform.parent;
-
-			Debug.Log ("pos " + z [i].transform);
-
+			objects [i] = Instantiate (firstObject); //
+			objects [i].transform.parent = firstObject.transform.parent;
 			x++;
 			x = x + 0.5f;
-				z [i].transform.position = new Vector3 (0.5f,0,x);
-			z [i].GetComponent<MeshRenderer> ().material.color = Color.white;
-
+			objects [i].transform.position = new Vector3 (0.5f,0,x);
+			objects [i].GetComponent<MeshRenderer> ().material.color = Color.white;
 		}
 
-		Camera cam = Camera.main;
-		//Debug.Log(z.Length/2);
-		//debugz.Length/2;
-		Vector3 tempPos = cam.transform.position;
-		tempPos.z = z[z.Length/2].transform.position.z;
-		tempPos.x =  z.Length/2 +10f;
-		tempPos.y = tempPos.y + 0.35f;
-		n++;
+		reArrangeCamera();
 
-		cam.transform.position = tempPos;
-
-		//porDefecto = objetos [0].GetComponent<MeshRenderer> ().material.color;
 	}
 
 
-
+	//Adjusts camera to the size of the array
+	public void reArrangeCamera()
+	{
+		Camera cam = Camera.main;
+		Vector3 tempPos = cam.transform.position;
+		tempPos.z = objects[objects.Length/2].transform.position.z;
+		tempPos.x =  objects.Length/2 +10f;
+		tempPos.y = tempPos.y + 0.35f;
+		//n++;
+		cam.transform.position = tempPos;
+	}
+		
+	public void clearInputField()
+	{
+		inputField.GetComponent<InputField> ().text = "";
+	}
+		
 }

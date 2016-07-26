@@ -2,6 +2,7 @@
 
 An Ed. project implemented in Unity that aims to help students understand Data Structures by visualizing them in a 3D environment.
 
+This project is an Unity project, therefore you’ll need to have Unity installed to check it; there’s still not a build at the moment since it’s in progress.
 
 Current Data Structures implemented:
 
