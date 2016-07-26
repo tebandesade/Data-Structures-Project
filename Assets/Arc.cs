@@ -11,14 +11,14 @@ public class Arc {
 	GameObject vertex2 ; 
 
 	//Reference to the graph
-	public Graph graph;
-
+	public  Graph graph;
 	//Line renderer that will be the shown arc
 	LineRenderer rend;
 
-	public Arc(GameObject go1 , GameObject go2, Graph graph)
+
+	public Arc(GameObject go1 , GameObject go2,Graph grap)
 	{
-		graph = graph;
+		graph = grap;
 		vertex1 = go1;
 		vertex2 = go2;
 		rend = vertex1.AddComponent<LineRenderer> ();
@@ -38,7 +38,8 @@ public class Arc {
 	//The input field now asks for the cost of the arc created
 	void changeInputField()
 	{
-		GameObject it = graph.input.gameObject;
+		Debug.Log (graph);
+		GameObject it = graph.input.gameObject;	
 		it.SetActive (true);
 		it.GetComponent<InputField> ().placeholder.GetComponent<Text> ().text = "What's the cost?";
 	}

@@ -5,10 +5,10 @@ using UnityEngine.UI;
 public class Graph : MonoBehaviour {
 
 	//Gets inputField
-	public InputField input;
+	public  InputField input;
 
 	//Gets button that accepts InputField
-	public Button acceptButton;
+	public  Button acceptButton;
 
 	//Text of the inputField
 	string inputText;
@@ -22,10 +22,14 @@ public class Graph : MonoBehaviour {
 	//Node selected #2
 	GameObject selectedNode2;
 
+	//Current Graph
+	Graph actual;
+
 	void Awake()
 	{
 		selectedNode1 = null;
 		selectedNode2 = null;
+		actual = this;
 	}
 
 	// Use this for initialization
@@ -129,7 +133,7 @@ public class Graph : MonoBehaviour {
 	//Creates an Arc
 	void createArc(GameObject go1, GameObject go2)
 	{
-		Arc ca =new Arc (go1, go2, this);
+		Arc ca =new Arc (go1, go2, actual);
 	}
 
 	//Returns the current Node
