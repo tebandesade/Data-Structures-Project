@@ -10,21 +10,28 @@ public class Graph : MonoBehaviour {
 	//Gets button that accepts InputField
 	public  Button acceptButton;
 
-	//Text of the inputField
-	string inputText;
+	//Gets inputField
+	public  InputField inputCost;
+
+	//Gets button that accepts InputField
+	public  Button costButton;
+
+	//Erased inputText
 
 	//Arc that will join the two nodes
 	public Arc arc;
 
 	//Node selected #1
-	GameObject selectedNode1;
+	public GameObject selectedNode1;
 
 	//Node selected #2
-	GameObject selectedNode2;
+	public GameObject selectedNode2;
 
 	//Current Graph
-	Graph actual;
+	public Graph actual;
 
+	public Canvas costCanvas;
+	
 	void Awake()
 	{
 		selectedNode1 = null;
@@ -48,10 +55,11 @@ public class Graph : MonoBehaviour {
 	//Setup for the nodes in 3D space
 	public void nodeSetup()
 	{
-		inputText = input.GetComponent<InputField> ().text;
+		string inputText = input.GetComponent<InputField> ().text;
 		int amount = int.Parse (inputText); //# of nodes you want
 		createNodes (amount);
 		input.GetComponent<InputField> ().text = "";
+		inputText = "";
 		changeState (input.gameObject);
 		changeState (acceptButton.gameObject);
 
@@ -133,7 +141,8 @@ public class Graph : MonoBehaviour {
 	//Creates an Arc
 	void createArc(GameObject go1, GameObject go2)
 	{
-		Arc ca =new Arc (go1, go2, actual);
+		arc =new Arc (go1, go2, actual);
+
 	}
 
 	//Returns the current Node
@@ -163,6 +172,23 @@ public class Graph : MonoBehaviour {
 		else if(mr.material.color==Color.green)
 		{
 		  mr.material.color = Color.red;
+		}
+	}
+
+	public	void enableCostInput()
+	{
+		changeState (costButton.gameObject);
+		changeState (inputCost.gameObject);
+			
+	}
+
+	public void verifyCostSet()
+	{
+		if (string.IsNullOrEmpty (inputCost.text)) {
+			Debug.Log ("It's empty");
+		} else { 
+			Debug.Log ("It's not empty");
+			arc.setCost (inputCost.text);
 		}
 	}
 }

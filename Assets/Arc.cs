@@ -16,31 +16,40 @@ public class Arc {
 	LineRenderer rend;
 
 
+
 	public Arc(GameObject go1 , GameObject go2,Graph grap)
 	{
 		graph = grap;
 		vertex1 = go1;
 		vertex2 = go2;
 		rend = vertex1.AddComponent<LineRenderer> ();
+		rend.material.color = Color.blue;
 		rend.SetVertexCount (2);
 		createLine ();
 	}
+
+
 
 	//Displays a line that connects the two vertexs in 3D space
 	void createLine()
 	{
 		//Ask for cost
-		changeInputField ();
+		graph.enableCostInput();
 		rend.SetPosition (0, vertex1.transform.position);
 		rend.SetPosition (1, vertex2.transform.position);
 	}
 
-	//The input field now asks for the cost of the arc created
-	void changeInputField()
+	public void setCost(string tex)
 	{
-		Debug.Log (graph);
-		GameObject it = graph.input.gameObject;	
-		it.SetActive (true);
-		it.GetComponent<InputField> ().placeholder.GetComponent<Text> ().text = "What's the cost?";
-	}
+		Vector3 first = vertex1.transform.position;
+		Vector3 second = vertex2.transform.position;
+		Vector3 result = (first + second)/2;
+		GameObject texto = new GameObject ();
+		texto.transform.position = result;
+		texto.transform.SetParent (graph.costCanvas.transform);
+		texto.AddComponent<Text> ();
+		texto.GetComponent<Text> ().text = "Hola";
+	} 
+
 }
+		

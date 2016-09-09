@@ -1,8 +1,11 @@
 ﻿<Properties RefactoringSettings.EnableRefactorings="True" StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Arreglo.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../Unity Pereira/UnityPereira/Assets/testInputCreation.cs">
     <Files>
-      <File FileName="Assets/Arreglo.cs" Line="1" Column="1" />
+      <File FileName="Assets/Arc.cs" Line="34" Column="4" />
+      <File FileName="Assets/Arreglo.cs" Line="22" Column="30" />
+      <File FileName="Assets/Graph.cs" Line="136" Column="38" />
+      <File FileName="../../Unity Pereira/UnityPereira/Assets/testInputCreation.cs" Line="65" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
