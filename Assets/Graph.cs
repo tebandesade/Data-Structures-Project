@@ -11,7 +11,7 @@ public class Graph : MonoBehaviour {
 	public  Button acceptButton;
 
 	//Gets inputField
-	public  InputField inputCost;
+	public  InputField inputCost;	
 
 	//Gets button that accepts InputField
 	public  Button costButton;
